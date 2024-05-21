@@ -1,29 +1,29 @@
-# TÍTULO DO PROJETO
+VEÍCULO CONTROLADO ATRAVÉS DO PESO 
 
-`CAMPUS/UNIDADE`
+Puc Minas - Campus Coração Eucarístico
 
-`CURSO`
+Engenharia de computação
 
-`SEMESTRE`
+1º Semestre
 
-`DISCIPLINA`
+Laboratório de Introdução à Engenharia de Computação
 
 
-## Integrantes
+Integrantes:
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
-* Nome completo do aluno 5
+João Pedro Mineli Delgado Lage 
+Leonardo de Souza Fernandes
+Pedro Henrique Ferreira Rodrigues
+Gustavo Luciano Leite Salomão
+Isabella Gianna Fonseca e Silva 
 
-## Orientador
+Orientador
 
-* Nome completo do professor 1
+Marta Dias Moreira Noronha
 
-## Resumo
+Resumo
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+O projeto consiste na criação de um veículo controlado através de um esp32 intergrado a um aplicativo de celular. Utlizando esse mesmo aplicativo será feita uma regulagem da velocidade do veículo baseado no total de carga que está presente no compartimento predefinido 
 
 # Código (do arduino ou esp32)
 
