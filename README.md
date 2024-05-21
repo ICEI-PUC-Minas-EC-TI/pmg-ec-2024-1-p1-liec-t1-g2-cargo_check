@@ -11,11 +11,11 @@ Laboratório de Introdução à Engenharia de Computação
 
 Integrantes:
 
-João Pedro Mineli Delgado Lage 
-Leonardo de Souza Fernandes
-Pedro Henrique Ferreira Rodrigues
-Gustavo Luciano Leite Salomão
-Isabella Gianna Fonseca e Silva 
+João Pedro Mineli Delgado Lage  
+Leonardo de Souza Fernandes  
+Pedro Henrique Ferreira Rodrigues  
+Gustavo Luciano Leite Salomão  
+Isabella Gianna Fonseca e Silva  
 
 Orientador
 
