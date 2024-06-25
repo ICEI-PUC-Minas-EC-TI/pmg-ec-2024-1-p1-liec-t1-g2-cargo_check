@@ -3,24 +3,25 @@
 
 # Metodologia
 
-Descreva aqui a metodologia de trabalho do grupo para atacar o problema. Definições sobre os ambiente de trabalho utilizados pela  equipe para desenvolver o projeto. Abrange a relação de ambientes utilizados, a estrutura para gestão do código fonte, além da definição do processo e ferramenta através dos quais a equipe se organiza (Gestão de Times).
+Nesse projeto fizemos a divisão dos das funções durante aulas presencias, e as mantivemos até a finalização do projeto, assim a linha de pensamento de cada uma das partes seria constante durante toda sua concepção
 
 ### Divisão de Papéis
 
 Apresente a divisão de papéis entre os membros do grupo.
 
-Exemplificação: A equipe utiliza metodologias ágeis, tendo escolhido o Scrum como base para definição do processo de desenvolvimento. A equipe está organizada da seguinte maneira:
-- Scrum Master: Aluno 1;
-- Equipe de Desenvolvimento: Aluno 1, Aluno 2, Aluno 3;
+•	Scrum master: João Pedro Mineli
+•	Equipe de desenvolvimento: João Pedro Mineli Delgado Lage, Leonardo de Souza Fernandes, Pedro Henrique Ferreira Rodrigues, Gustavo Luciano Leite Salomão, Isabella Gianna Fonseca e Silva
 
 
 ### Processo
 
-Coloque  informações sobre detalhes da implementação do Scrum seguido pelo grupo. Cole aqui um print do quadro Kanban utilizado pelo grupo.
+Durante o desenvolvimento do projeto dividimos cada um com uma função fixa, Leonardo cuidou do desenvolvimento do código do esp32 e o desenvolvimento do app, João Pedro cuidou da montagem do hardware, Gustavo cuidou da documentação e Isabella e Pedro Henrique cuidaram de fazer testes 
  
 
 ### Ferramentas
 
 As ferramentas utilizadas no projeto foram:
 
-- Liste aqui as ferramentas utilizadas para desenvolvimento do projeto (como por exemplo: Arduino IDE, APP Inventor, trello e outros). Obs: não é para listar aqui os componentes utilizados.
+•	Tinkercad
+•	Appinventor
+•	Arduinio IDE 
