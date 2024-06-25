@@ -85,7 +85,7 @@ Dependendo da diferença, o aplicativo envia um comando de volta via Bluetooth o
 
 ### Montagem
 
-Descreva como foi o processo da montagem do projeto.
+Durante a montagem do hardware do projeto, foi feita uma pesquisa sobre os diagramas tanto do sensor de peso quanto da ativação do motor, assim que consideramos com informações os suficientes começamos a montagem de ambos os sistemas que seriam integrados através do esp32 e do app 
 
 ### Desenvolvimento do Código
 
