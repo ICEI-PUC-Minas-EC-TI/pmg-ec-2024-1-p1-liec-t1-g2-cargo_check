@@ -1,12 +1,22 @@
 
 # Materiais
 
-Os materiais utilizados no projeto foram:
-- Liste os materiais usados no projeto, como Arduino/ESP, sensores, atuadores e outros.
+No projeto foram utilizados:
+•	1 esp32
+•	1 ponte H L298n
+•	2 pilhas aa
+•	1 protoboard
+•	1 célula de carga 
+•	1 Módulo Conversor Amplificador Hx711
+•	1 motor DC 
 
 # Desenvolvimento
 
-Descreva aqui como foi o desenvolvimento do trabalho, destacando cada uma das etapas necessárias para chegar até a solução final.
+Para chegar no resultado do projeto é necessário passar por algumas etapas:
+•	Criar um rascunho do veículo e aplicativo 
+•	Montagem de ambos os sistemas de motor e balança 
+•	Programação do esp32 e do aplicativo 
+•	Testes finais 
 
 ## Desenvolvimento do Aplicativo
 
