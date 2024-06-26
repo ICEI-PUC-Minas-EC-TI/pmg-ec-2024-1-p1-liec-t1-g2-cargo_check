@@ -1,16 +1,181 @@
-int Senval=0;
-int Senpin=A0;
+#include <HX711.h>
+#include <BluetoothSerial.h>
 
-void setup()
-{
-Serial.begin(9600);
+// Configuração dos pinos para o módulo HX711
+const int PINO_DT = 13;
+const int PINO_SCK = 12;
+
+// Configuração dos pinos para o driver do motor
+const int ENA = 14;  // Pino para habilitação do motor
+const int IN1 = 26;  // Pino PWM para controle de direção
+const int IN2 = 27;  // Pino PWM para controle de direção
+
+const int TEMPO_ESPERA = 1000; // Declaração da variável de espera
+
+HX711 escala; // Declaração do objeto escala na classe HX711 da biblioteca
+
+float fator_calibracao = -10000; // Pré-definição da variável de calibração
+
+BluetoothSerial SerialBT; // Criação de um objeto BluetoothSerial
+
+unsigned long previousMillis = 0; // Variável para armazenar o tempo anterior
+const long intervaloEnvio = 10000; // Intervalo de envio em milissegundos (1 segundo)
+
+void setup() {
+  Serial.begin(9600);
+  SerialBT.begin("ESP32_BT"); // Inicialização do Bluetooth com o nome "ESP32_BT"
+
+  Serial.println("Setup completo. Aguardando comandos do motor...");
+  Serial.println("Comandos possíveis:");
+  Serial.println("1: Parar motor");
+  Serial.println("2: Mover motor frente (velocidade intermediária)");
+  Serial.println("3: Mover motor frente (velocidade alta)");
+  Serial.println("5: Mover motor frente (velocidade muito alta)");
+  Serial.println("6: Mover motor frente (velocidade máxima)");
+  Serial.println("7: Mover motor frente (velocidade máxima)");
+
+  Serial.println("Celula de carga - Calibracao de Peso");
+  Serial.println("Posicione um peso conhecido sobre a celula ao comecar as leituras");
+
+  escala.begin(PINO_DT, PINO_SCK);
+  float media_leitura = escala.read_average(); 
+  Serial.print("Media de leituras com Celula sem carga: ");
+  Serial.print(media_leitura);
+  Serial.println();
+
+  escala.tare(); 
+  escala.set_scale(fator_calibracao);
+
+  // Configuração dos pinos do motor
+  pinMode(ENA, OUTPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+
+  // Teste inicial do motor
+  digitalWrite(ENA, HIGH);  // Habilitar o driver do motor
+  analogWrite(IN1, 128);    // Velocidade média
+  delay(2000);              // Manter por 2 segundos
+  analogWrite(IN1, 0);      // Parar o motor
+  delay(2000);              // Esperar por 2 segundos
 }
 
-void loop()
-{
-Senval=analogRead(Senpin);
+void loop() {
+  escala.set_scale(fator_calibracao);
 
-Serial.println(Senval);
+  if (escala.is_ready()) {
+    unsigned long currentMillis = millis();
+    if (currentMillis - previousMillis >= intervaloEnvio) {
+      previousMillis = currentMillis;
 
-delay(200);
+      float peso = escala.get_units(10); // Armazena o peso em uma variável
+
+      if (peso > 0) { // Verifica se o peso é maior que zero
+        // Verificação da conexão Bluetooth antes de enviar os dados
+        if (SerialBT.hasClient()) {
+          int pesoInt = (int)peso;
+          SerialBT.write((byte*)&pesoInt, sizeof(pesoInt)); // Envia o peso como inteiro
+        } else {
+          Serial.println("Nenhum cliente Bluetooth conectado");
+        }
+
+        Serial.print("Leitura: ");
+        Serial.print(peso);
+        Serial.println(" kg");
+        Serial.print(" \t Fator de Calibracao = ");
+        Serial.println(fator_calibracao);
+      } else {
+        Serial.print("Peso negativo ou zero: ");
+        Serial.println(peso);
+      }
+    }
+
+    if (Serial.available()) {
+      char comando = Serial.read();
+      switch (comando) {
+        case 'x':
+          fator_calibracao = fator_calibracao - 500;
+          break;
+        case 'c':
+          fator_calibracao = fator_calibracao + 500;
+          break;
+        case 'v':
+          fator_calibracao = fator_calibracao - 10;
+          break;
+        case 'b':
+          fator_calibracao = fator_calibracao + 10;
+          break;
+        case 'n':
+          fator_calibracao = fator_calibracao - 1;
+          break;
+        case 'm':
+          fator_calibracao = fator_calibracao + 1;
+          break;
+        case 't':
+          escala.tare();
+          break;
+      }
+    }
+
+    if (SerialBT.available()) {
+      int comando = SerialBT.read();
+      Serial.print("Comando recebido via Bluetooth: ");
+      Serial.println(comando);
+      // controleMotor(comando);
+
+      Serial.print("Executando comando para o motor: ");
+      Serial.println(comando);
+
+      switch (comando) {
+        case 1:
+          // Parar o motor
+          analogWrite(IN1, 0);
+          analogWrite(IN2, 0);
+          break;
+        case 2:
+          // Mover motor para frente com velocidade intermediária
+          digitalWrite(ENA, HIGH);
+          analogWrite(IN1, 80);
+          analogWrite(IN2, 0);
+          break;
+        case 3:
+          // Mover motor para frente com velocidade intermediária
+          digitalWrite(ENA, HIGH);
+          analogWrite(IN1, 90);
+          analogWrite(IN2, 0);
+          break;
+        case 4:
+          // Mover motor para frente com velocidade intermediária
+          digitalWrite(ENA, HIGH);
+          analogWrite(IN1, 100);
+          analogWrite(IN2, 0);
+          break;
+        case 5:
+          // Mover motor para frente com velocidade intermediária
+          digitalWrite(ENA, HIGH);
+          analogWrite(IN1, 130);
+          analogWrite(IN2, 0);
+          break;
+        case 6:
+          // Mover motor para frente com velocidade maxima
+          digitalWrite(ENA, HIGH);
+          analogWrite(IN1, 250);
+          analogWrite(IN2, 0);
+          break;
+        case 7:
+          // Mover motor para frente com velocidade alta
+          digitalWrite(ENA, HIGH);
+          analogWrite(IN1, 200);
+          analogWrite(IN2, 0);
+          break;
+        default:
+          // Parar o motor para qualquer outro comando
+          analogWrite(IN1, 0);
+          analogWrite(IN2, 0);
+          break;
+      }
+    }
+  } else {
+    Serial.print("HX-711 ocupado");
+  }
+  delay(TEMPO_ESPERA);
 }
