@@ -69,7 +69,7 @@ void loop() {
 
       float peso = escala.get_units(10); // Armazena o peso em uma variável
 
-      if (peso > 0) { // Verifica se o peso é maior que zero
+      if (peso >= 0) { // Verifica se o peso é maior ou igual a zero
         // Verificação da conexão Bluetooth antes de enviar os dados
         if (SerialBT.hasClient()) {
           int pesoInt = (int)peso;
