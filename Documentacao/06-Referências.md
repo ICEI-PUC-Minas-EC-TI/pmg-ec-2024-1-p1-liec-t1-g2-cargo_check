@@ -7,3 +7,5 @@ BRINCANDO COM IDEIAS. O Arduino funciona como uma balança? Sim! Ele é capaz! -
 LUUK, Indrek. 50kg Load Cells with HX711 and Arduino. Disponível em: https://circuitjournal.com/50kg-load-cells-with-HX711.
 
 PASCHOAL, Neto. Como enviar dados via bluetooth para o ESP32. [Vídeo]. 2020. Disponível em: https://www.youtube.com/watch?v=BSP0_3vnUkA&t.
+
+Clube da Eletrônica. Desenvolvimento Completo com ESP32, Arduino e App Inventor: Da Programação à Criação de Apps. Disponível em: https://www.youtube.com/watch?v=meDo6UdR4IU.
