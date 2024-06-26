@@ -10,6 +10,7 @@ Nesse projeto fizemos a divisão dos das funções durante aulas presencias, e a
 Apresente a divisão de papéis entre os membros do grupo.
 
 •	Scrum master: João Pedro Mineli
+
 •	Equipe de desenvolvimento: João Pedro Mineli Delgado Lage, Leonardo de Souza Fernandes, Pedro Henrique Ferreira Rodrigues, Gustavo Luciano Leite Salomão, Isabella Gianna Fonseca e Silva
 
 
