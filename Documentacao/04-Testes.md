@@ -1,3 +1,3 @@
 # Testes do Projeto
 
-Descreva aqui como foram realizados os testes para o funcionamento do projeto. Descreva também os resultados encontrados e as limitações do projeto.
+Para realizar os testes dos projetos primeiramente separamos os dois sistemas do projeto. Realizamos primeiro os testes da balança para verificar seu funcionamento, definindo fatores como taxa de calibração e cases para cada um dos casos pré-estabelecidos. Para o motor primeiramente testamos o funcionamento da ponte H e o motor, para o motor checamos a continuidade dele e o conectamos diretamente a nossa bateria para garantir que ele estava funcionando. Após os testes de ambos os sistemas separadamente, fizemos as integrações através do esp32 e do aplicativo do app inventor para fazer o teste final com ambos os sistemas integrados
