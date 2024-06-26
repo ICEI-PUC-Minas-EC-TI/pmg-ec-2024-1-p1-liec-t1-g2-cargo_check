@@ -118,4 +118,52 @@ Finalmente, configuramos a lógica para controlar um motor usando o driver L298N
 
 ## Comunicação entre App e Hardware
 
-Descreva como foi o processo de comunicação entre App e arduino/ESP.
+Parte do App (App Inventor)
+Configuração Inicial:
+
+O app cria um dicionário (caminhões) com diferentes caminhões e suas capacidades (por exemplo, caminhão1 = 10, caminhão2 = 20).
+O app define variáveis globais (global_caminhão, global_receved_data, etc.) para armazenar dados temporários.
+Escolha do Caminhão:
+
+Quando você seleciona um caminhão no app, ele salva a capacidade desse caminhão na variável global_caminhão.
+Conexão Bluetooth:
+
+O app escaneia os dispositivos Bluetooth disponíveis.
+Quando você seleciona um dispositivo da lista, o app se conecta a ele.
+Recepção de Dados via Bluetooth:
+
+O app usa um temporizador para verificar se há dados recebidos do ESP32 via Bluetooth.
+Quando recebe dados, ele armazena esses dados na variável global_receved_data e chama uma função para atualizar a interface do usuário.
+Atualização e Envio de Comandos:
+
+A função Atualizar compara os dados recebidos (peso) com a capacidade do caminhão escolhido.
+Dependendo da diferença, o app mostra diferentes mensagens e envia comandos ao ESP32 para controlar o motor.
+Parte do ESP32 (Código Arduino)
+Configuração Inicial:
+
+O código configura os pinos para o sensor de carga (HX711) e para o motor.
+Inicializa a comunicação serial e a comunicação Bluetooth.
+Configura a célula de carga e calibra ela.
+Leitura do Peso:
+
+No loop principal, o ESP32 lê o peso usando a célula de carga.
+Se o peso for válido, ele envia os dados via Bluetooth para o app.
+Recepção de Comandos:
+
+O ESP32 espera por comandos do app via Bluetooth.
+Dependendo do comando recebido, ele controla o motor (por exemplo, parar, mover para frente com diferentes velocidades).
+Resumo
+App: O app escolhe um caminhão, se conecta ao ESP32 via Bluetooth, recebe dados de peso do ESP32, e envia comandos para controlar o motor baseado nos dados recebidos.
+ESP32: O ESP32 lê o peso da célula de carga, envia os dados de peso para o app via Bluetooth, e controla o motor de acordo com os comandos recebidos do app.
+Fluxo de Comunicação
+Inicialização:
+O app e o ESP32 são inicializados. O app se conecta ao ESP32 via Bluetooth.
+Escolha do Caminhão:
+O usuário escolhe um caminhão no app.
+Leitura e Envio de Peso:
+O ESP32 lê o peso usando a célula de carga e envia os dados para o app.
+Processamento de Dados no App:
+O app recebe os dados de peso e decide qual comando enviar ao ESP32.
+Controle do Motor:
+O ESP32 recebe o comando do app e controla o motor de acordo.
+Este é o processo de comunicação simplificado entre o app e o ESP32 usando o código fornecido, considerando agora que estamos falando de "caminhões".
