@@ -63,16 +63,19 @@ Atualiza o texto de Bluetooth1 com os dados recebidos e chama a função atualiz
 atualizar:
 
 Converte o texto de Marco_do_seu_caminhão para número e define global caminhão no com este valor.
-Verifica se global caminhão no está no dicionário caminhõinhos.
-Calcula a diferença entre global received_data e global caminhão no.
-Dependendo do valor de global diferenca, realiza diferentes ações:
-Se diferenca >= 0:
-Atualiza o texto de Resultado1 com a mensagem adequada.
-Se diferenca < 0:
-Envia o valor de decimal (1, 2 ou 3) para ClienteBluetooth1 dependendo do valor de diferenca.
-Atualiza o texto de Resultado1 com a mensagem adequada.
-Marco_do_seu_caminhão.AfterPicking:
+Verifica se global caminhão no está no dicionário caminhões.
+Calcula a diferença entre global received_data e global caminhão.
 
+Dependo do global received_data e global caminhão o codigo pode tomar diferentes ações, se global received_data for menor que global caminhão ele faz a diferença de carga atualiza o texto com a mensagem apropriada e envia o numero 7.
+
+No caso de global received_data e global caminhão terem o mesmo valor ele atualiza o texto com a mensagem apropriada e envia o numero 5. 
+
+No caso de global received_data ser igual a 0 ele atualiza o texto com a mensagem apropriada e envia o numero 6. 
+
+Dependendo do valor de global diferenca, realiza diferentes ações:
+Se diferenca < 30:
+Envia o valor de decimal (1, 2, 3 ou 4) para ClienteBluetooth1 dependendo do valor de diferenca.
+Atualiza o texto de Resultado1 com a mensagem adequada.
 Chama a função atualizar.
 
 Resumo do Fluxo:
@@ -89,7 +92,29 @@ Durante a montagem do hardware do projeto, foi feita uma pesquisa sobre os diagr
 
 ### Desenvolvimento do Código
 
-Descreva como foi o desenvolvimento do código do arduino/ESP.
+O desenvolvimento do código para o Arduino/ESP32 foi um processo cuidadoso, dividido em várias etapas fundamentais:
+
+1. Configuração Inicial
+Objetivo: Estabelecer os componentes e pinos essenciais, além de incluir as bibliotecas necessárias.
+
+A primeira tarefa foi incluir as bibliotecas apropriadas para o sensor de carga (HX711) e a comunicação Bluetooth. Em seguida, definimos quais pinos do ESP32 seriam utilizados para conectar o sensor de carga e o driver do motor.
+
+2. Inicialização no Setup
+Objetivo: Inicializar a comunicação serial e Bluetooth, configurar o sensor de carga, e definir os pinos para o controle do motor.
+
+No método setup(), começamos inicializando a comunicação serial para monitoramento e a comunicação Bluetooth para permitir a conexão com um dispositivo externo. Em seguida, configuramos o sensor de carga, calibrando-o e ajustando a escala. Também configuramos os pinos de controle do motor como saídas.
+
+3. Leitura e Envio de Dados no Loop
+Objetivo: Ler dados do sensor de carga e enviá-los via Bluetooth em intervalos regulares, além de responder a comandos para controlar o motor.
+
+No método loop(), implementamos a lógica principal do programa. Primeiramente, verificamos se o sensor de carga está pronto para fornecer uma leitura. Se estiver, lemos os dados, calculamos o peso e os enviamos via Bluetooth se houver um cliente conectado.
+
+Adicionalmente, configuramos um temporizador para garantir que os dados fossem enviados em intervalos regulares, evitando sobrecarga de comunicação. Também monitoramos a porta serial para verificar se havia comandos recebidos para ajustar a calibração do sensor de carga.
+
+4. Controle do Motor
+Objetivo: Implementar a lógica de controle do motor com base nos dados recebidos e comandos do usuário.
+
+Finalmente, configuramos a lógica para controlar um motor usando o driver L298N. Dependendo dos dados recebidos via Bluetooth, ajustamos a velocidade do motor. A lógica foi projetada para ajustar a velocidade do motor proporcionalmente ao peso detectado pelo sensor de carga, garantindo que o motor respondesse de maneira adequada às mudanças na carga.
 
 ## Comunicação entre App e Hardware
 
