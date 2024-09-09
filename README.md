@@ -17,7 +17,7 @@ Pedro Henrique Ferreira Rodrigues
 Gustavo Luciano Leite Salomão  
 Isabella Gianna Fonseca e Silva  
 
-Orientador
+Orientadores
 
 Marta Dias Moreira Noronha
 Sandro Jerônimo de Almeida
